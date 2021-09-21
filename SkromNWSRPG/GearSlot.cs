@@ -3,7 +3,7 @@
 namespace SkromNWSRPG
 {
     /*
-     * Cette Enum doit contenir les différents emplacement où il est possible d'équiper un objet:
+     * Cette Enum doit contenir les différents emplacements où il est possible d'équiper un objet:
      * - Head
      * - Back
      * - Chest
@@ -15,5 +15,13 @@ namespace SkromNWSRPG
      */
     public enum GearSlot
     {
-    }
+        Head,
+        Back,
+        Chest,
+        Legs,
+        Feet,
+        Weapon,
+        OffHand,
+        TwoHand
+}
 }
