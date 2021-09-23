@@ -32,6 +32,8 @@ namespace SkromNWSRPG
             Slot = GearSlot;
             Defence = defence;
 
+
+
             if (GearSlot == GearSlot.Weapon || GearSlot == GearSlot.TwoHand || GearSlot == GearSlot.OffHand)
             {
                 throw new Exception("Votre armure ne peux pas être une arme");

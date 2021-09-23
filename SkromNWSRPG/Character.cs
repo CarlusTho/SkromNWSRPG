@@ -25,8 +25,88 @@ namespace SkromNWSRPG
      * Elle prend en paramètre un GearSlot
      * Elle renvoie l'objet équipé à l'emplacement passé en paramètre
      * Elle renvoie null si il n'y a rien à cet emplacement
+     *
+     *             // Faire un dictionnaire avec clefs/valeurs GearSlot/Gear
      */
     public class Character
     {
+        public string Name;
+        public int Life;
+        public Dictionary<GearSlot, Gear> dictionnaire = new Dictionary<GearSlot, Gear>();
+        public bool isEquip = false;
+        public Character(string name, int life)
+        {
+            Name = name;
+            Life = life;
+            setStuff();
+        }
+
+        public void setStuff()
+        {
+            dictionnaire[GearSlot.Head] = null;
+            dictionnaire[GearSlot.Back] = null;
+            dictionnaire[GearSlot.Chest] = null;
+            dictionnaire[GearSlot.Legs] = null;
+            dictionnaire[GearSlot.Feet] = null;
+            dictionnaire[GearSlot.Weapon] = null;
+            dictionnaire[GearSlot.TwoHand] = null;
+            dictionnaire[GearSlot.OffHand] = null;
+        }
+
+        public void Equip(Gear equipment)
+        {
+
+            switch (equipment.Slot)
+            {
+
+                case GearSlot.TwoHand:
+                    dictionnaire[GearSlot.Weapon] = equipment;
+                    dictionnaire[GearSlot.OffHand] = null;
+                    break;
+
+                case GearSlot.Weapon:
+                    if (this.isEquip == true)
+                    {
+                        dictionnaire[GearSlot.OffHand] = equipment;
+                        this.isEquip = false;
+                    }
+                    else
+                    {
+                        dictionnaire[GearSlot.Weapon] = equipment;
+                        this.isEquip = true;
+                    }
+                    dictionnaire[GearSlot.TwoHand] = null;
+                    break;
+
+                case GearSlot.OffHand:
+                    dictionnaire[GearSlot.OffHand] = equipment;
+                    dictionnaire[GearSlot.Weapon] = null;
+                    break;
+
+                case GearSlot.Head:
+                    dictionnaire[GearSlot.Head] = equipment;
+                    break;
+
+                case GearSlot.Back:
+                    dictionnaire[GearSlot.Back] = equipment;
+                    break;
+
+                case GearSlot.Chest:
+                    dictionnaire[GearSlot.Chest] = equipment;
+                    break;
+
+                case GearSlot.Legs:
+                    dictionnaire[GearSlot.Legs] = equipment;
+                    break;
+
+                case GearSlot.Feet:
+                    dictionnaire[GearSlot.Feet] = equipment;
+                    break;
+
+                default:
+                    throw new Exception("Votre objet n'est pas une arme/armure");
+            }
+        }
+
     }
 }
