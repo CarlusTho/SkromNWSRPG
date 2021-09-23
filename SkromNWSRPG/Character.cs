@@ -107,6 +107,67 @@ namespace SkromNWSRPG
                     throw new Exception("Votre objet n'est pas une arme/armure");
             }
         }
+        public int GetTotalDamage()
+        {
+            HandledItem rightHand, leftHand;
+            int dommage = 0;
+            rightHand = (HandledItem)GetItemInSlot(GearSlot.Weapon);
+            leftHand = (HandledItem)GetItemInSlot(GearSlot.OffHand);
+            dommage += rightHand.Damage + leftHand.Damage;
 
+            return dommage;
+        }
+
+        public int GetTotalDefence()
+        {
+            HandledItem rightHand, leftHand;
+            Armor head, back, chest, legs, feet;
+            int defense = 0;
+            rightHand = (HandledItem)GetItemInSlot(GearSlot.Weapon);
+            leftHand = (HandledItem)GetItemInSlot(GearSlot.OffHand);
+
+            head = (Armor)GetItemInSlot(GearSlot.Head);
+            back = (Armor)GetItemInSlot(GearSlot.Back);
+            chest = (Armor)GetItemInSlot(GearSlot.Chest);
+            legs = (Armor)GetItemInSlot(GearSlot.Legs);
+            feet = (Armor)GetItemInSlot(GearSlot.Feet);
+
+            if (dictionnaire[GearSlot.Head] != null)
+            {
+                defense += head.Defence;
+            }
+            if (dictionnaire[GearSlot.Back] != null)
+            {
+                defense += back.Defence;
+            }
+            if (dictionnaire[GearSlot.Chest] != null)
+            {
+                defense += chest.Defence;
+            }
+            if (dictionnaire[GearSlot.Legs] != null)
+            {
+                defense += legs.Defence;
+            }
+            if (dictionnaire[GearSlot.Feet] != null)
+            {
+                defense += feet.Defence;
+            }
+
+            defense += rightHand.Defence + leftHand.Defence;
+
+            return defense;
+        }
+
+        public Gear GetItemInSlot(GearSlot slot)
+        {
+            if (dictionnaire[slot] != null)
+            {
+                return dictionnaire[slot];
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
